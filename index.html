@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج العمل التجاري (Business Model Canvas)</title>
+    <style>
+        :root {
+            --primary: #2A4365;
+            --secondary: #3182CE;
+            --accent: #48BB78;
+            --text: #2D3748;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: #F7FAFC;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .company-name {
+            font-size: 2.5rem;
+            color: var(--primary);
+            border: none;
+            background: transparent;
+            text-align: center;
+            width: 100%;
+            margin: 20px 0;
+            padding: 10px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            gap: 15px;
+        }
+
+        .canvas-block {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .block-title {
+            font-size: 1.2rem;
+            color: white;
+            background: var(--secondary);
+            padding: 12px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 700;
+        }
+
+        .content {
+            min-height: 150px;
+            padding: 10px;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            color: var(--text);
+            border: none;
+            resize: none;
+            width: 100%;
+            cursor: text;
+        }
+
+        .content ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .content li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+        }
+
+        .content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.4em;
+            line-height: 1;
+        }
+
+        .controls {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 30px 0;
+            
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 10px 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
+            }
+
+            body {
+                width: 297mm !important;
+                height: 210mm !important;
+                padding: 5mm !important;
+                margin: 0 auto !important;
+                zoom: 90%;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background: white !important;
+            }
+
+            .company-name {
+                font-size: 28pt !important;
+                color: var(--primary) !important;
+                border-bottom: 3mm solid var(--secondary) !important;
+                padding-bottom: 2mm !important;
+                margin-bottom: 5mm !important;
+            }
+
+            .container {
+                display: grid !important;
+                grid-template-columns: repeat(5, 1fr) !important;
+                gap: 2mm !important;
+                transform: scale(0.98);
+                transform-origin: top center;
+                height: 175mm !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .canvas-block {
+                border: 2px solid var(--primary) !important;
+                border-radius: 4mm !important;
+                background: white !important;
+                min-height: 78mm !important;
+                page-break-inside: avoid !important;
+                box-shadow: inset 0 0 3mm rgba(49,130,206,0.2) !important;
+                padding: 3mm !important;
+            }
+
+            .block-title {
+                background: var(--secondary) !important;
+                color: white !important;
+                font-size: 14pt !important;
+                padding: 3mm !important;
+                margin: -3mm -3mm 3mm -3mm !important;
+                border-radius: 4mm 4mm 0 0 !important;
+            }
+
+            .content {
+                font-size: 10pt !important;
+                line-height: 1.6 !important;
+                color: var(--text) !important;
+                min-height: 60mm !important;
+            }
+
+            .btn, .controls {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .canvas-block {
+                grid-area: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-name {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <input type="text" class="company-name" placeholder="اسم الشركة هنا...">
+    </div>
+
+    <div class="container">
+        <div class="canvas-block" id="partners">
+            <div class="block-title">الشركاء الرئيسيون</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="activities">
+            <div class="block-title">الأنشطة الرئيسية</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="resources">
+            <div class="block-title">الموارد الرئيسية</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="value">
+            <div class="block-title">العرض القيمي</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="relationships">
+            <div class="block-title">علاقات العملاء</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="channels">
+            <div class="block-title">قنوات التوزيع</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="customers">
+            <div class="block-title">شرائح العملاء</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="costs">
+            <div class="block-title">هيكل التكاليف</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="canvas-block" id="revenues">
+            <div class="block-title">مصادر الإيرادات</div>
+            <div class="content" contenteditable="true"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="saveCanvas()">💾 حفظ النموذج</button>
+            <button class="btn" onclick="printCanvas()">🖨️ طباعة</button>
+            <button class="btn" onclick="clearCanvas()">🧹 مسح الكل</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.content').forEach(div => {
+            div.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.execCommand('insertHTML', false, '<li></li>');
+                }
+            });
+        });
+
+        function saveCanvas() {
+            const data = {
+                companyName: document.querySelector('.company-name').value,
+                content: {}
+            };
+
+            document.querySelectorAll('.canvas-block').forEach((block, index) => {
+                const id = block.id;
+                data.content[id] = block.querySelector('.content').innerHTML;
+            });
+
+            localStorage.setItem('bmcData', JSON.stringify(data));
+            alert('تم الحفظ بنجاح ✓');
+        }
+
+        function loadCanvas() {
+            const savedData = localStorage.getItem('bmcData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.querySelector('.company-name').value = data.companyName || '';
+                
+                Object.entries(data.content).forEach(([id, content]) => {
+                    const block = document.getElementById(id);
+                    if (block) block.querySelector('.content').innerHTML = content;
+                });
+            }
+        }
+
+        function clearCanvas() {
+            if (confirm('هل تريد مسح جميع البيانات؟')) {
+                localStorage.removeItem('bmcData');
+                document.querySelector('.company-name').value = '';
+                document.querySelectorAll('.content').forEach(div => div.innerHTML = '');
+            }
+        }
+
+        function printCanvas() {
+            window.print();
+        }
+
+        window.addEventListener('DOMContentLoaded', loadCanvas);
+    </script>
+</body>
+</html>
