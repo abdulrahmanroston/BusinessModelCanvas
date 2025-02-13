@@ -324,6 +324,44 @@
         }
 
         window.addEventListener('DOMContentLoaded', loadCanvas);
+
+
+// for Count Number of Uesres
+
+document.addEventListener("DOMContentLoaded", function () {
+    let form = document.createElement("form");
+    form.style.display = "none";
+    form.method = "POST";
+    form.action = "https://hooks.airtable.com/workflows/v1/genericWebhook/app4wSzf8emO0Gf3l/wfl7PeMIZSZKsXSmx/wtrbhl3qwTBAMnMV3";
+    
+    let ipInput = document.createElement("input");
+    ipInput.type = "hidden";
+    ipInput.name = "device_ip";
+
+    let openInput = document.createElement("input");
+    openInput.type = "hidden";
+    openInput.name = "open";
+    openInput.value = "true";
+
+    fetch("https://api64.ipify.org?format=json")
+        .then(response => response.json())
+        .then(data => {
+            ipInput.value = data.ip;
+            form.appendChild(ipInput);
+            form.appendChild(openInput);
+            document.body.appendChild(form);
+
+            let iframe = document.createElement("iframe");
+            iframe.style.display = "none";
+            document.body.appendChild(iframe);
+
+            form.target = iframe.name = "hiddenFrame";
+            form.submit();
+        })
+        .catch(error => console.error(error));
+});
+
+
     </script>
 </body>
 </html>
