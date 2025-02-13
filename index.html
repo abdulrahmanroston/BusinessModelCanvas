@@ -326,31 +326,6 @@
         window.addEventListener('DOMContentLoaded', loadCanvas);
 
 
-// for Count Number of Uesres
-
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("https://api64.ipify.org?format=json")
-        .then(response => response.json())
-        .then(data => {
-            let payload = {
-                device_ip: data.ip,
-                open: true
-            };
-
-            fetch("https://hooks.airtable.com/workflows/v1/genericWebhook/app4wSzf8emO0Gf3l/wfl7PeMIZSZKsXSmx/wtrbhl3qwTBAMnMV3", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            }).then(response => {
-           
-            }).catch(error => console.error(error));
-        })
-        .catch(error => console.error(error));
-});
-
-
     </script>
 </body>
 </html>
